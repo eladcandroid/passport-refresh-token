@@ -10,6 +10,15 @@ This strategy is used to refresh the Oauth 2.0 access tokens issued by the serve
 
 ## Usage
 
+#### Require Strategy
+
+Require the `passport-google-authcode` Strategy along with `passport`
+
+```js
+var passport = require('passport');
+var RefreshTokenStrategy = require('passport-refresh-token').Strategy;
+```
+
 #### Configure Strategy
 
 The Refresh token strategy authenticates the request using the refresh token.
@@ -19,15 +28,17 @@ typically including associated scope, which will be set by Passport at
 `req.authInfo` to be used by later middleware for authorization and access
 control.
 
-    passport.use(new RequestTokenStrategy(
-      function(token, done) {
-        User.findOne({ token: token }, function (err, user) {
-          if (err) { return done(err); }
-          if (!user) { return done(null, false); }
-          return done(null, user, { scope: 'all' });
-        });
-      }
-    ));
+```js
+passport.use(new RefreshTokenStrategy(
+  function(token, done) {
+    User.findOne({ token: token }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      return done(null, user, { scope: 'all' });
+    });
+  }
+));
+```
 
 #### Authenticate Requests
 
@@ -38,11 +49,17 @@ support, so the `session` option can be set to `false`.
 For example, as route middleware in an [Express](http://expressjs.com/)
 application:
 
-    app.get('/auth/token/refresh', 
-      passport.authenticate('refresh_token', { session: false }),
-      function(req, res) {
-        res.json(req.user);
-      });
+```js
+app.get('/auth/token/refresh', 
+  passport.authenticate('refresh_token', { session: false }),
+  function(req, res) {
+    // generate new tokens for req.user
+    res.json(tokens);
+  }
+);
+```
+
+The post request to this route should include a JSON object with the key `refresh_token` set to the refresh token issued earlier by the server.
 
 ## Credits
 
