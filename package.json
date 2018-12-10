@@ -1,0 +1,40 @@
+{
+  "name": "passport-refresh-token",
+  "version": "0.0.1",
+  "description": "Passport strategy to authenticate using a previously issued refresh token, and provide new access tokens for Oauth 2.0 flow.",
+  "author": {
+    "name": "Shobhit Singhal",
+    "email": "shobhitsinghal624@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shobhitsinghal624/passport-refresh-token.git"
+  },
+  "bugs": {
+    "url": "http://github.com/shobhitsinghal624/passport-refresh-token/issues"
+  },
+  "main": "./lib",
+  "dependencies": {
+    "passport-strategy": "1.x.x"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "keywords": [
+    "passport",
+    "auth",
+    "authn",
+    "authentication",
+    "authz",
+    "authorization",
+    "refresh",
+    "token",
+    "oauth"
+  ]
+}
